@@ -6,7 +6,7 @@
 			<NumInput label="Gross Salary" bind:value={grossSalary} /><b>+</b>
 			<NumInput label="Income from Savings account" bind:value={incomeFromSavingsAccount} /><b>+</b>
 			<NumInput label="Income from Other sources" bind:value={incomeFromOtherSources} /><b>+</b>
-			<NumInput label="Income from House Property" bind:value={incomeFromHouseProperty} min="" />
+			<NumInput label="Income from House Property" bind:value={incomeFromHouseProperty} min="" allowNegativeValues />
 		</div>
 		<br/>
 		<br/><br/>
