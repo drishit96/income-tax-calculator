@@ -45,7 +45,7 @@
 		<p>
 			<b>Net taxable income in Old Regime</b>
 			({grossTotalIncomeUnderOldRegime >= 0 ? grossTotalIncomeUnderOldRegime : 0} - {Math.min(150000, number(deduction80C))} - 
-			 {Math.min(50000, number(deduction80D))} - {deduction80TTA} - {number(otherDeductions)}) = 
+			 {Math.min(100000, number(deduction80D))} - {deduction80TTA} - {number(otherDeductions)}) = 
 			<b>{numFormatterWithDec.format(netTaxableIncomeUnderOldRegime >= 0 ? netTaxableIncomeUnderOldRegime : 0)}</b>
 		</p>
 
@@ -173,6 +173,9 @@
 	import getTaxPayable from './taxCalculator.js'
 	import NumInput from './NumInput.svelte';
 
+	const NEW_TAX_REGIME = 0;
+	const OLD_TAX_REGIME = 1;
+
 	let grossSalary = 0;
 	let incomeFromOtherSources = 0;
 	let incomeFromSavingsAccount = 0;
@@ -201,9 +204,9 @@
 	$: grossTotalIncomeUnderNewRegime = number(grossSalary) + number(incomeFromOtherSources) + number(incomeFromSavingsAccount)
 																			+ number(incomeFromHouseProperty);
 	$: netTaxableIncomeUnderOldRegime = grossTotalIncomeUnderOldRegime - Math.min(150000, number(deduction80C)) - 
-																			Math.min(50000, number(deduction80D)) - deduction80TTA - number(otherDeductions);
-	$: taxPayableUnderOldRegime = getTaxPayable(netTaxableIncomeUnderOldRegime, 1);
-	$: taxPayableUnderNewRegime = getTaxPayable(grossTotalIncomeUnderNewRegime, 0);
+																			Math.min(100000, number(deduction80D)) - deduction80TTA - number(otherDeductions);
+	$: taxPayableUnderOldRegime = getTaxPayable(netTaxableIncomeUnderOldRegime, OLD_TAX_REGIME);
+	$: taxPayableUnderNewRegime = getTaxPayable(grossTotalIncomeUnderNewRegime, NEW_TAX_REGIME);
 
 	const numFormatter = new Intl.NumberFormat('en-IN', {
 		style: 'currency',
