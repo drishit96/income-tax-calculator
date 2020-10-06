@@ -1,7 +1,7 @@
 <div>
   <label>
     {label}<br/>
-    <input type="number" min={min} step="any" bind:value="{value}" {disabled} />
+    <input type="number" min={min} step="any" bind:value="{value}" {disabled} on:input={handleInput} />
   </label>
 </div>
 
@@ -10,6 +10,13 @@
 	export let value = 0;
 	export let min = 0;
 	export let disabled = false;
+	export let allowNegativeValues = false;
+
+	const handleInput = e => {
+		if (!allowNegativeValues) {
+			value = Math.abs(e.target.value);
+		}
+  };
 </script>
 
 <style>
