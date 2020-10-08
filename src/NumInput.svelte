@@ -1,11 +1,12 @@
 <div>
   <label>
     {label}<br/>
-    <input type="number" min={min} step="any" bind:value="{value}" {disabled} on:input={handleInput} />
+    <input data-id={dataId} type="number" min={min} step="any" bind:value="{value}" {disabled} on:input={handleInput} />
   </label>
 </div>
 
 <script>
+	export let dataId = "";
   export let label = "";
 	export let value = 0;
 	export let min = 0;

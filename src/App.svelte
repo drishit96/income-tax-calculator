@@ -3,20 +3,20 @@
 		<h1>Income Tax Calculator</h1>
 		<br/>
 		<div class="incomeContainer">
-			<NumInput label="Gross Salary" bind:value={grossSalary} /><b>+</b>
-			<NumInput label="Income from Savings account" bind:value={incomeFromSavingsAccount} /><b>+</b>
-			<NumInput label="Income from Other sources" bind:value={incomeFromOtherSources} /><b>+</b>
-			<NumInput label="Income from House Property" bind:value={incomeFromHouseProperty} min="" allowNegativeValues />
+			<NumInput dataId="grossSalary" label="Gross Salary" bind:value={grossSalary} /><b>+</b>
+			<NumInput dataId="incomeFromSavingsAccount" label="Income from Savings account" bind:value={incomeFromSavingsAccount} /><b>+</b>
+			<NumInput dataId="incomeFromOtherSources" label="Income from Other sources" bind:value={incomeFromOtherSources} /><b>+</b>
+			<NumInput dataId="incomeFromHouseProperty" label="Income from House Property" bind:value={incomeFromHouseProperty} min="" allowNegativeValues />
 		</div>
 		<br/>
 		<br/><br/>
 		<div class="exemptionsContainer"><b>-</b>
-			<NumInput label="Standard deduction" value={standardDeduction} disabled /><b>-</b>
-			<NumInput label="Entertainment allowance" bind:value={entertainmentAllowance} /><b>-</b>
-			<NumInput label="Professional tax" bind:value={professionalTax} /><b>-</b>
+			<NumInput dataId="standardDeduction" label="Standard deduction" value={standardDeduction} disabled /><b>-</b>
+			<NumInput dataId="entertainmentAllowance" label="Entertainment allowance" bind:value={entertainmentAllowance} /><b>-</b>
+			<NumInput dataId="professionalTax" label="Professional tax" bind:value={professionalTax} /><b>-</b>
 			<div>
-				<NumInput label="HRA Exemption" bind:value={hraExemption} />
-				<button on:click={() => dialog.open()}>Calculate HRA Exemption</button>
+				<NumInput dataId="hraExemption" label="HRA Exemption" bind:value={hraExemption} />
+				<button data-id="hraExemptionCalculator" on:click={() => dialog.open()}>Calculate HRA Exemption</button>
 			</div>
 		</div>
 	
@@ -35,10 +35,10 @@
 
 		<br/><br/>
 		<div class="deductionsContainer"><b>-</b>
-			<NumInput label="Deductions under 80C" bind:value={deduction80C} /><b>-</b>
-			<NumInput label="Deductions under 80D" bind:value={deduction80D} /><b>-</b>
-			<NumInput label="Deductions under 80TTA" bind:value={deduction80TTA} disabled /><b>-</b>
-			<NumInput label="Other Deductions: 80CCF, 80G, 80E, etc." bind:value={otherDeductions} />
+			<NumInput dataId="deduction80C" label="Deductions under 80C" bind:value={deduction80C} /><b>-</b>
+			<NumInput dataId="deduction80D" label="Deductions under 80D" bind:value={deduction80D} /><b>-</b>
+			<NumInput dataId="deduction80TTA" label="Deductions under 80TTA" bind:value={deduction80TTA} disabled /><b>-</b>
+			<NumInput dataId="otherDeductions" label="Other Deductions: 80CCF, 80G, 80E, etc." bind:value={otherDeductions} />
 		</div>
 
 		<br/>
@@ -131,15 +131,15 @@
 					<td></td>
 					<th>Tax in New regime <br/>(including cess)</th>
 					<td></td>
-					<th>Savings {taxPayableUnderOldRegime == taxPayableUnderNewRegime ? '' : taxPayableUnderOldRegime <= taxPayableUnderNewRegime ? 'in Old regime' : 'in New regime'}</th>
+					<th data-id="taxSavingsHeader">Savings {taxPayableUnderOldRegime == taxPayableUnderNewRegime ? '' : taxPayableUnderOldRegime <= taxPayableUnderNewRegime ? 'in Old regime' : 'in New regime'}</th>
         </tr>
     	</thead>
 			<tr>
-				<td>{numFormatter.format(taxPayableUnderOldRegime)}</td>
+				<td data-id="taxPayableUnderOldRegime">{numFormatter.format(taxPayableUnderOldRegime)}</td>
 				<td>-</td>
-				<td>{numFormatter.format(taxPayableUnderNewRegime)}</td>
+				<td data-id="taxPayableUnderNewRegime">{numFormatter.format(taxPayableUnderNewRegime)}</td>
 				<td>=</td>
-				<td>{numFormatter.format(Math.abs(taxPayableUnderOldRegime - taxPayableUnderNewRegime))}</td>
+				<td data-id="taxSavingsValue">{numFormatter.format(Math.abs(taxPayableUnderOldRegime - taxPayableUnderNewRegime))}</td>
 			</tr>
 		</table>
 	</div>
@@ -150,10 +150,10 @@
 		aria-describedby="dialog-content">
 		<Title id="dialog-title">HRA Exemption Calculator</Title>
 		<Content id="dialog-content">
-			<NumInput label="Basic Salary (Annual)" bind:value={basicSalary} /><br/>
-			<NumInput label="Dearness allowance" bind:value={dearanceAllowance} /><br/>
-			<NumInput label="HRA received" bind:value={hraReceived} /><br/>
-			<NumInput label="Actual rent paid" bind:value={actualRentPaid} /><br/>
+			<NumInput dataId="basicSalary" label="Basic Salary (Annual)" bind:value={basicSalary} /><br/>
+			<NumInput dataId="dearanceAllowance" label="Dearness allowance" bind:value={dearanceAllowance} /><br/>
+			<NumInput dataId="hraReceived" label="HRA received" bind:value={hraReceived} /><br/>
+			<NumInput dataId="actualRentPaid" label="Actual rent paid" bind:value={actualRentPaid} /><br/>
 			
 			<p>Do you live in a metro (Delhi, Mumbai, Chennal or Kolkata)?</p>
 			<input type="radio" id="yes" bind:group={cityMultiplier} value={0.5}>
@@ -163,7 +163,7 @@
 		</Content>
 		<Actions>
 			<button on:click={() => dialog.close()}>Cancel</button>
-			<button on:click={() => calculateHRAExemption()}>Calculate</button>
+			<button data-id="calculateHRAButton" on:click={() => calculateHRAExemption()}>Calculate</button>
 		</Actions>
 	</Dialog>
 </main>
