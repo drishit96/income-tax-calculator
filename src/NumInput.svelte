@@ -15,7 +15,7 @@
 
 	const handleInput = e => {
 		if (!allowNegativeValues) {
-			value = Math.abs(e.target.value);
+			e.target.validity.valid || (value = '');
 		}
 	};
 	
