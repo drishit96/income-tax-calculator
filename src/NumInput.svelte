@@ -1,7 +1,7 @@
 <div>
   <label>
     {label}<br/>
-    <input data-id={dataId} type="number" min={min} step="any" bind:value="{value}" {disabled} on:input={handleInput} />
+    <input data-id={dataId} type="number" min={min} step="any" bind:value="{value}" {disabled} on:input={handleInput} on:focus={selectAll} />
   </label>
 </div>
 
@@ -17,7 +17,11 @@
 		if (!allowNegativeValues) {
 			value = Math.abs(e.target.value);
 		}
-  };
+	};
+	
+	const selectAll = function() {
+		this.select();
+	}
 </script>
 
 <style>
