@@ -1,4 +1,4 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/drishit96/income-tax-calculator/blob/main/LICENSE) ![E2E Tests](https://github.com/drishit96/income-tax-calculator/workflows/E2E%20Tests/badge.svg?branch=main)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/drishit96/income-tax-calculator/blob/main/LICENSE) ![E2E Tests](https://github.com/drishit96/income-tax-calculator/workflows/E2E%20Tests/badge.svg?branch=main) ![CodeQL](https://github.com/drishit96/income-tax-calculator/workflows/CodeQL/badge.svg?branch=main)
 
 # Income Tax Calculator
 
