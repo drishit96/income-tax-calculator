@@ -225,7 +225,7 @@
 		dialog.close();
 	}
 
-	function number(val) { return !val || isNaN(val) ? 0 : val; }
+	function number(val) { return !val || isNaN(val) ? 0 : Number(val); }
 </script>
 
 <style>
