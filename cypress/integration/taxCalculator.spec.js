@@ -17,11 +17,12 @@ describe('Income tax calculator tests', () => {
     cy.get("[data-id='deduction80C']").type('120000');
     cy.get("[data-id='deduction80D']").type('10000');
     cy.get("[data-id='deduction80TTA']").should('be.disabled').and('have.value', "10000");
+    cy.get("[data-id='otherDeductions']").type('50000');
 
     cy.get("[data-id='taxSavingsHeader']").should('have.text', 'Savings in Old regime')
-    cy.get("[data-id='taxPayableUnderOldRegime']").should('have.text', '₹36,192')
+    cy.get("[data-id='taxPayableUnderOldRegime']").should('have.text', '₹25,792')
     cy.get("[data-id='taxPayableUnderNewRegime']").should('have.text', '₹50,700')
-    cy.get("[data-id='taxSavingsValue']").should('have.text', '₹14,508')
+    cy.get("[data-id='taxSavingsValue']").should('have.text', '₹24,908')
   })
 
   it('should not allow negative value for any input except "Income from House Property"', () => {
