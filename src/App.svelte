@@ -1,3 +1,8 @@
+<nav>
+	<a href="https://github.com/drishit96/income-tax-calculator" target="_blank" rel="noopener noreferrer">
+		<img alt="Open source on GitHub" src="/img/link_to_github.png" width="40" height="40">
+	</a>
+</nav>
 <main>
 	<section class="container">
 		<h1>Income Tax Calculator</h1>
@@ -231,6 +236,18 @@
 <style>
 	* {
 		font-family: 'Inter';
+	}
+
+	nav {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	nav > a {
+		padding: 10px;
+		border-radius: 10px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	}
 
 	main, section {
