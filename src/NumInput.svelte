@@ -1,7 +1,7 @@
 <div>
   <label>
     {label}<br/>
-    <input data-id={dataId} type="number" min={min} step="any" bind:value="{value}" {disabled} on:input={handleInput} on:focus={selectAll} />
+    <input data-id={dataId} type="number" min={min} step="any" enterkeyhint="next" on:keydown={handleKeyDown} bind:value="{value}" {disabled} on:input={handleInput} on:focus={selectAll} />
   </label>
 </div>
 
@@ -17,6 +17,25 @@
 		if (!allowNegativeValues) {
 			e.target.validity.valid || (value = '');
 		}
+	};
+
+	const handleKeyDown = e => {
+		if (e.which == 13) {
+			e.preventDefault();
+			var inputs = Array.from(document.getElementsByTagName('input'));
+			const currentElementIndex = inputs.findIndex(input => input.attributes['data-id'] && input.attributes['data-id'].value == document.activeElement.attributes['data-id'].value);
+			if (!inputs[currentElementIndex + 1]) return;
+			
+			if (!inputs[currentElementIndex + 1].disabled) {
+				inputs[currentElementIndex + 1].focus();
+			} else {
+				let nextIndex = currentElementIndex + 2;
+				while(inputs[nextIndex] && inputs[nextIndex].disabled) {
+					nextIndex += 1;
+				}
+				if (inputs[nextIndex]) { inputs[nextIndex].focus(); }
+			}
+    }
 	};
 	
 	const selectAll = function() {
