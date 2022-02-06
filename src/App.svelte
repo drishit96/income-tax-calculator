@@ -43,14 +43,17 @@
 			<NumInput dataId="deduction80C" label="Deductions under 80C" bind:value={deduction80C} /><b>-</b>
 			<NumInput dataId="deduction80D" label="Deductions under 80D" bind:value={deduction80D} /><b>-</b>
 			<NumInput dataId="deduction80TTA" label="Deductions under 80TTA" bind:value={deduction80TTA} disabled /><b>-</b>
-			<NumInput dataId="otherDeductions" label="Other Deductions: 80CCF, 80G, 80E, etc." bind:value={otherDeductions} />
+			<NumInput dataId="deduction80CCD1B" label="Deductions under 80CCD(1B)" bind:value={deduction80CCD1B} /><b>-</b>
+			<span class="marginTop10">
+				<NumInput dataId="otherDeductions" label="Other Deductions: 80CCF, 80G, 80E, etc." bind:value={otherDeductions} />
+			</span>
 		</div>
 
 		<br/>
 		<p>
 			<b>Net taxable income in Old Regime</b>
 			({grossTotalIncomeUnderOldRegime >= 0 ? grossTotalIncomeUnderOldRegime : 0} - {Math.min(150000, number(deduction80C))} - 
-			 {Math.min(100000, number(deduction80D))} - {deduction80TTA} - {number(otherDeductions)}) = 
+			 {Math.min(100000, number(deduction80D))} - {deduction80TTA} - {Math.min(50000, number(deduction80CCD1B))} - {number(otherDeductions)}) = 
 			<b>{numFormatterWithDec.format(netTaxableIncomeUnderOldRegime >= 0 ? netTaxableIncomeUnderOldRegime : 0)}</b>
 		</p>
 
@@ -191,6 +194,7 @@
 	let incomeFromHouseProperty = 0;
 	let deduction80C = 0;
 	let deduction80D = 0;
+	let deduction80CCD1B = 0;
 	let otherDeductions = 0;
 
 	let dialog;
@@ -209,7 +213,8 @@
 	$: grossTotalIncomeUnderNewRegime = number(grossSalary) + number(incomeFromOtherSources) + number(incomeFromSavingsAccount)
 																			+ number(incomeFromHouseProperty);
 	$: netTaxableIncomeUnderOldRegime = grossTotalIncomeUnderOldRegime - Math.min(150000, number(deduction80C)) - 
-																			Math.min(100000, number(deduction80D)) - deduction80TTA - number(otherDeductions);
+																			Math.min(100000, number(deduction80D)) - Math.min(50000, number(deduction80CCD1B)) - 
+																			deduction80TTA - number(otherDeductions);
 	$: taxPayableUnderOldRegime = getTaxPayable(netTaxableIncomeUnderOldRegime, OLD_TAX_REGIME);
 	$: taxPayableUnderNewRegime = getTaxPayable(grossTotalIncomeUnderNewRegime, NEW_TAX_REGIME);
 
@@ -356,6 +361,10 @@
 	@media only screen and (min-width: 1200px) {
 		.taxPayableContainer {
 			width: 40%;
+		}
+
+		.marginTop10 {
+			margin-top: 30px;
 		}
 	}
 
