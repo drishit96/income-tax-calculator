@@ -1,0 +1,21 @@
+{
+  "name": "Income Tax Calculator",
+  "short_name": "Income Tax Calculator",
+  "start_url": "index.html",
+  "scope": "./",
+  "icons": [
+    {
+      "src": "income-tax-calculator.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "income-tax-calculator.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#388E3C",
+  "background_color": "#fff",
+  "display": "standalone"
+}
