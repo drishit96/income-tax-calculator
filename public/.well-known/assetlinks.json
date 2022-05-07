@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.app.incometaxcalculator",
+      "sha256_cert_fingerprints": [
+        "8F:3E:02:C4:21:85:C8:79:B1:D3:EF:3F:60:AC:82:FC:98:7F:DD:D1:2E:82:CD:7E:AB:66:67:C8:55:30:BA:A4"
+      ]
+    }
+  }
+]
