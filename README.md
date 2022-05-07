@@ -5,6 +5,8 @@
 Helps you calculate your income tax according to both new and old tax regimes.
 (Currently, the calculator assumes that the user's age is below 60)
 
+[<img src="https://user-images.githubusercontent.com/13049630/167261179-740abe4c-30a5-40e1-9dbd-2e5e501e5a32.png" width="150" />](https://play.google.com/store/apps/details?id=com.app.incometaxcalculator)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
