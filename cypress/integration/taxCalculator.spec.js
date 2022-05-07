@@ -1,6 +1,17 @@
 /// <reference types="Cypress" />
 
 describe('Income tax calculator tests', () => {
+  //unregister all service workers
+  beforeEach(() => {
+    if (window.navigator && navigator.serviceWorker) {
+      navigator.serviceWorker.getRegistrations().then((registrations) => {
+        registrations.forEach((registration) => {
+          registration.unregister()
+        });
+      });
+    }
+  });
+
   it('should show correct tax for given input', () => {
     cy.visit('http://localhost:5000/');
 
