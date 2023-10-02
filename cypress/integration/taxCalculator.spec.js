@@ -28,6 +28,7 @@ describe('Income tax calculator tests', () => {
     cy.get("[data-id='deduction80C']").type('120000');
     cy.get("[data-id='deduction80D']").type('10000');
     cy.get("[data-id='deduction80CCD1B']").type('20000');
+    cy.get("[data-id='deduction80CCD2']").type('10000');
     cy.get("[data-id='deduction80TTA']").should('be.disabled').and('have.value', "10000");
     cy.get("[data-id='otherDeductions']").type('50000');
 
