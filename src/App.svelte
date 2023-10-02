@@ -29,7 +29,7 @@
 										
 		<p>
 			<b>Gross total income in New Regime</b>
-			({number(grossSalary)} + {number(incomeFromSavingsAccount)} + {number(incomeFromOtherSources)} + {number(incomeFromHouseProperty)}) = 
+			({number(grossSalary)} + {number(incomeFromSavingsAccount)} + {number(incomeFromOtherSources)} - {number(standardDeduction)} + {number(incomeFromHouseProperty)}) = 
 			<b>{numFormatterWithDec.format(grossTotalIncomeUnderNewRegime >= 0 ? grossTotalIncomeUnderNewRegime : 0)}</b>
 		</p>
 
@@ -40,6 +40,10 @@
 			<NumInput dataId="deduction80TTA" label="Deductions under 80TTA" bind:value={deduction80TTA} disabled /><b>-</b>
 			<NumInput dataId="deduction80CCD1B" label="Deductions under 80CCD(1B)" bind:value={deduction80CCD1B} /><b>-</b>
 			<span class="marginTop10">
+				<NumInput dataId="deduction80CCD2" label="Deductions under 80CCD(2)" bind:value={deduction80CCD2} />
+			</span>
+			<b>-</b>
+			<span class="marginTop10">
 				<NumInput dataId="otherDeductions" label="Other Deductions: 80CCF, 80G, 80E, etc." bind:value={otherDeductions} />
 			</span>
 		</div>
@@ -48,13 +52,14 @@
 		<p>
 			<b>Net taxable income in Old Regime</b>
 			({grossTotalIncomeUnderOldRegime >= 0 ? grossTotalIncomeUnderOldRegime : 0} - {Math.min(150000, number(deduction80C))} - 
-			 {Math.min(100000, number(deduction80D))} - {deduction80TTA} - {Math.min(50000, number(deduction80CCD1B))} - {number(otherDeductions)}) = 
+			 {Math.min(100000, number(deduction80D))} - {deduction80TTA} - {Math.min(50000, number(deduction80CCD1B))} - {number(deduction80CCD2)} - {number(otherDeductions)}) = 
 			<b>{numFormatterWithDec.format(netTaxableIncomeUnderOldRegime >= 0 ? netTaxableIncomeUnderOldRegime : 0)}</b>
 		</p>
 
 		<p>
-			<b>Net taxable income in New Regime = 
-				{numFormatterWithDec.format(grossTotalIncomeUnderNewRegime >= 0 ? grossTotalIncomeUnderNewRegime : 0)}
+			<b>Net taxable income in New Regime</b> ({grossTotalIncomeUnderNewRegime >= 0 ? grossTotalIncomeUnderNewRegime : 0} - {number(deduction80CCD2)}) = 
+			<b>
+				{numFormatterWithDec.format(netTaxableIncomeUnderNewRegime >= 0 ? netTaxableIncomeUnderNewRegime : 0)}
 			</b>
 		</p>
 
@@ -76,33 +81,43 @@
 			<tbody>
 				<tr>
 					<td>Upto ₹ 2.5 Lakhs</td>
-					<td>0</td>
-					<td>0</td>
+					<td>0%</td>
+					<td>0%</td>
 				</tr>
 				<tr>
-					<td>₹ 2.5 Lakhs - ₹ 5 Lakhs</td>
+					<td>₹ 2.5 Lakhs - ₹ 3 Lakhs</td>
+					<td>5%</td>
+					<td>0%</td>
+				</tr>
+				<tr>
+					<td>₹ 3 Lakhs - ₹ 5 Lakhs</td>
 					<td>5%</td>
 					<td>5%</td>
 				</tr>
 				<tr>
-					<td>₹ 5 Lakhs - ₹ 7.5 Lakhs</td>
+					<td>₹ 5 Lakhs - ₹ 6 Lakhs</td>
+					<td>20%</td>
+					<td>5%</td>
+				</tr>
+				<tr>
+					<td>₹ 6 Lakhs - ₹ 9 Lakhs</td>
 					<td>20%</td>
 					<td>10%</td>
 				</tr>
 				<tr>
-					<td>₹ 7.5 Lakhs - ₹ 10 Lakhs</td>
+					<td>₹ 9 Lakhs - ₹ 10 Lakhs</td>
 					<td>20%</td>
 					<td>15%</td>
 				</tr>
 				<tr>
-					<td>₹ 10 Lakhs - ₹ 12.5 Lakhs</td>
+					<td>₹ 10 Lakhs - ₹ 12 Lakhs</td>
 					<td>30%</td>
-					<td>20%</td>
+					<td>15%</td>
 				</tr>
 				<tr>
-					<td>₹ 12.5 Lakhs - ₹ 15 Lakhs</td>
+					<td>₹ 12 Lakhs - ₹ 15 Lakhs</td>
 					<td>30%</td>
-					<td>25%</td>
+					<td>20%</td>
 				</tr>
 				<tr>
 					<td>&gt; ₹ 15 Lakhs</td>
@@ -116,7 +131,6 @@
 			<ul>
 				<li>House Rent Allowance</li>
 				<li>Leave Travel Concession</li>
-				<li>Standard deduction on Salary</li>
 				<li>Deduction of professional tax</li>
 				<li>Deduction u/s 80C (life insurance etc.)</li>
 				<li>80CCD(1B) (your contribution to NPS up to INR 50,000)</li>
@@ -124,6 +138,7 @@
 				<li>80E (interest on education loan) etc.</li>
 			</ul>
 		</h4>
+		<h4 class="text-secondary"><strong>Note:</strong> 80CCD(2) (Employer's contribution to NPS) exemption is still applicable for new tax regime</h4>
 	</section>
 
 	<a class="sourceCodeInGitHub" href="https://github.com/drishit96/income-tax-calculator" target="_blank" rel="noopener noreferrer">
@@ -196,6 +211,7 @@
 	let deduction80C = 0;
 	let deduction80D = 0;
 	let deduction80CCD1B = 0;
+	let deduction80CCD2 = 0;
 	let otherDeductions = 0;
 
 	let dialog;
@@ -212,12 +228,13 @@
 																			- number(standardDeduction) - number(entertainmentAllowance) - number(professionalTax)
 																			- number(hraExemption) + number(incomeFromHouseProperty);
 	$: grossTotalIncomeUnderNewRegime = number(grossSalary) + number(incomeFromOtherSources) + number(incomeFromSavingsAccount)
-																			+ number(incomeFromHouseProperty);
+																			- number(standardDeduction)+ number(incomeFromHouseProperty);
 	$: netTaxableIncomeUnderOldRegime = grossTotalIncomeUnderOldRegime - Math.min(150000, number(deduction80C)) - 
 																			Math.min(100000, number(deduction80D)) - Math.min(50000, number(deduction80CCD1B)) - 
-																			deduction80TTA - number(otherDeductions);
+																			deduction80TTA - number(deduction80CCD2) - number(otherDeductions);
+	$: netTaxableIncomeUnderNewRegime = grossTotalIncomeUnderNewRegime - number(deduction80CCD2);
 	$: taxPayableUnderOldRegime = getTaxPayable(netTaxableIncomeUnderOldRegime, OLD_TAX_REGIME);
-	$: taxPayableUnderNewRegime = getTaxPayable(grossTotalIncomeUnderNewRegime, NEW_TAX_REGIME);
+	$: taxPayableUnderNewRegime = getTaxPayable(netTaxableIncomeUnderNewRegime, NEW_TAX_REGIME);
 
 	const numFormatter = new Intl.NumberFormat('en-IN', {
 		style: 'currency',
