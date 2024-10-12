@@ -11,7 +11,10 @@
 		<br/>
 		<br/><br/>
 		<div class="exemptionsContainer"><b>-</b>
-			<NumInput dataId="standardDeduction" label="Standard deduction" value={standardDeduction} disabled /><b>-</b>
+			<label>
+				Standard deduction<br/>
+				<input type="text" data-id="standardDeduction" label="Standard deduction" value={standardDeductionInOldRegime + " or " + standardDeductionInNewRegime} disabled />
+			</label><b>-</b>
 			<NumInput dataId="entertainmentAllowance" label="Entertainment allowance" bind:value={entertainmentAllowance} /><b>-</b>
 			<NumInput dataId="professionalTax" label="Professional tax" bind:value={professionalTax} /><b>-</b>
 			<div>
@@ -23,13 +26,13 @@
 		<br/>
 		<p>
 			<b>Gross total income in Old Regime</b>
-			({number(grossSalary)} + {number(incomeFromSavingsAccount)} + {number(incomeFromOtherSources)} + {number(incomeFromHouseProperty)} - {number(standardDeduction)} - {number(entertainmentAllowance)} - {number(professionalTax)} - {number(hraExemption)}) = 
+			({number(grossSalary)} + {number(incomeFromSavingsAccount)} + {number(incomeFromOtherSources)} + {number(incomeFromHouseProperty)} - {number(standardDeductionInOldRegime)} - {number(entertainmentAllowance)} - {number(professionalTax)} - {number(hraExemption)}) = 
 				<b>{numFormatterWithDec.format(grossTotalIncomeUnderOldRegime >= 0 ? grossTotalIncomeUnderOldRegime : 0)}</b>
 		</p>
 										
 		<p>
 			<b>Gross total income in New Regime</b>
-			({number(grossSalary)} + {number(incomeFromSavingsAccount)} + {number(incomeFromOtherSources)} - {number(standardDeduction)} + {number(incomeFromHouseProperty)}) = 
+			({number(grossSalary)} + {number(incomeFromSavingsAccount)} + {number(incomeFromOtherSources)} - {number(standardDeductionInNewRegime)} + {number(incomeFromHouseProperty)}) = 
 			<b>{numFormatterWithDec.format(grossTotalIncomeUnderNewRegime >= 0 ? grossTotalIncomeUnderNewRegime : 0)}</b>
 		</p>
 
@@ -95,19 +98,14 @@
 					<td>5%</td>
 				</tr>
 				<tr>
-					<td>₹ 5 Lakhs - ₹ 6 Lakhs</td>
+					<td>₹ 5 Lakhs - ₹ 7 Lakhs</td>
 					<td>20%</td>
 					<td>5%</td>
 				</tr>
 				<tr>
-					<td>₹ 6 Lakhs - ₹ 9 Lakhs</td>
+					<td>₹ 7 Lakhs - ₹ 10 Lakhs</td>
 					<td>20%</td>
 					<td>10%</td>
-				</tr>
-				<tr>
-					<td>₹ 9 Lakhs - ₹ 10 Lakhs</td>
-					<td>20%</td>
-					<td>15%</td>
 				</tr>
 				<tr>
 					<td>₹ 10 Lakhs - ₹ 12 Lakhs</td>
@@ -138,7 +136,7 @@
 				<li>80E (interest on education loan) etc.</li>
 			</ul>
 		</h4>
-		<h4 class="text-secondary"><strong>Note:</strong> 80CCD(2) (Employer's contribution to NPS) exemption is still applicable for new tax regime</h4>
+		<h4 class="text-secondary"><strong>Note:</strong> 80CCD(2) (Employer's contribution to NPS) exemption is applicable for both regimes. However, you get more deduction in new regime (14%) compared to old regime (10%)</h4>
 	</section>
 
 	<a class="sourceCodeInGitHub" href="https://github.com/drishit96/income-tax-calculator" target="_blank" rel="noopener noreferrer">
@@ -203,7 +201,8 @@
 	let grossSalary = 0;
 	let incomeFromOtherSources = 0;
 	let incomeFromSavingsAccount = 0;
-	const standardDeduction = 50000;
+	const standardDeductionInOldRegime = "50000";
+	const standardDeductionInNewRegime = "75000";
 	let professionalTax = 0;
 	let hraExemption = 0;
 	let entertainmentAllowance = 0;
@@ -225,10 +224,10 @@
 	$: calculatedHRAExemption = Math.min(number(cityMultiplier) * number(basicSalary), number(hraReceived), rentLess10PercSalary < 0 ? 0 : rentLess10PercSalary);
 	$: deduction80TTA = Math.min(10000, number(incomeFromSavingsAccount));
 	$: grossTotalIncomeUnderOldRegime = number(grossSalary) + number(incomeFromOtherSources) + number(incomeFromSavingsAccount) 
-																			- number(standardDeduction) - number(entertainmentAllowance) - number(professionalTax)
+																			- number(standardDeductionInOldRegime) - number(entertainmentAllowance) - number(professionalTax)
 																			- number(hraExemption) + number(incomeFromHouseProperty);
 	$: grossTotalIncomeUnderNewRegime = number(grossSalary) + number(incomeFromOtherSources) + number(incomeFromSavingsAccount)
-																			- number(standardDeduction)+ number(incomeFromHouseProperty);
+																			- number(standardDeductionInNewRegime)+ number(incomeFromHouseProperty);
 	$: netTaxableIncomeUnderOldRegime = grossTotalIncomeUnderOldRegime - Math.min(150000, number(deduction80C)) - 
 																			Math.min(100000, number(deduction80D)) - Math.min(50000, number(deduction80CCD1B)) - 
 																			deduction80TTA - number(deduction80CCD2) - number(otherDeductions);
@@ -299,6 +298,15 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+
+  label {
+		font-size: 0.85rem;
+	}
+
+	input {
+		font-size: 1rem;
+		padding: 12px;
 	}
 
 	h1, .container>p {

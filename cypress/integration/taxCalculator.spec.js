@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('Income tax calculator tests', () => {
   //unregister all service workers
@@ -20,7 +20,7 @@ describe('Income tax calculator tests', () => {
     cy.get("[data-id='incomeFromOtherSources']").type('50000');
     cy.get("[data-id='incomeFromHouseProperty']").type('10000');
 
-    cy.get("[data-id='standardDeduction']").should('be.disabled').and('have.value', "50000");
+    cy.get("[data-id='standardDeduction']").should('be.disabled').and('have.value', "50000 or 75000");
     cy.get("[data-id='entertainmentAllowance']").type('1000');
     cy.get("[data-id='professionalTax']").type('2500');
     cy.get("[data-id='hraExemption']").type('20000');
@@ -34,8 +34,8 @@ describe('Income tax calculator tests', () => {
 
     cy.get("[data-id='taxSavingsHeader']").should('have.text', 'Savings in Old regime')
     cy.get("[data-id='taxPayableUnderOldRegime']").should('have.text', '₹19,552')
-    cy.get("[data-id='taxPayableUnderNewRegime']").should('have.text', '₹32,760')
-    cy.get("[data-id='taxSavingsValue']").should('have.text', '₹13,208')
+    cy.get("[data-id='taxPayableUnderNewRegime']").should('have.text', '₹24,960')
+    cy.get("[data-id='taxSavingsValue']").should('have.text', '₹5,408')
   })
 
   it('should not allow negative value for any input except "Income from House Property"', () => {
