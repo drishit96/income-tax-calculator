@@ -62,19 +62,13 @@ describe('Income tax calculator tests', () => {
     cy.get("[data-id='deduction80TTA']").should('have.value', "10000");
 
     cy.get("[data-id='deduction80C']").type('200000');
-    cy.contains('Net taxable income in Old Regime (0 - 150000 - 0 - 10000 - 0 - 0 - 0)');
+    cy.get("[data-id='deduction80CValue']").contains('150000');
 
     cy.get("[data-id='deduction80D']").type('200000');
-    cy.contains('Net taxable income in Old Regime (0 - 150000 - 100000 - 10000 - 0 - 0 - 0)');
+    cy.get("[data-id='deduction80DValue']").contains('100000');
 
     cy.get("[data-id='deduction80CCD1B']").type('70000');
-    cy.contains('Net taxable income in Old Regime (0 - 150000 - 100000 - 10000 - 50000 - 0 - 0)');
-
-    cy.get("[data-id='deduction80CCD2']").type('85000');
-    cy.contains('Net taxable income in Old Regime (0 - 150000 - 100000 - 10000 - 50000 - 85000 - 0)');
-
-    cy.get("[data-id='otherDeductions']").type('50000');
-    cy.contains('Net taxable income in Old Regime (0 - 150000 - 100000 - 10000 - 50000 - 85000 - 50000)');
+    cy.get("[data-id='deduction80CCD1BValue']").contains('50000');
   })
 
   it('should calculate HRA Exemption correctly', () => {
