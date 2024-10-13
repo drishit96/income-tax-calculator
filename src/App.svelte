@@ -26,13 +26,13 @@
 		<br/>
 		<p>
 			<b>Gross total income in Old Regime</b>
-			({number(grossSalary)} + {number(incomeFromSavingsAccount)} + {number(incomeFromOtherSources)} + {number(incomeFromHouseProperty)} - {number(standardDeductionInOldRegime)} - {number(entertainmentAllowance)} - {number(professionalTax)} - {number(hraExemption)}) = 
+			(<ToolTip value={number(grossSalary)} label="Gross salary" /> + <ToolTip value={number(incomeFromSavingsAccount)} label="Income from Savings account" /> + <ToolTip value={number(incomeFromOtherSources)} label="Income from Other sources" /> + <ToolTip value={number(incomeFromHouseProperty)} label="Income from House Property" /> - <ToolTip value={number(standardDeductionInOldRegime)} label="Standard deduction" /> - <ToolTip value={number(entertainmentAllowance)} label="Entertainment allowance" /> - <ToolTip value={number(professionalTax)} label="Professional tax" /> - <ToolTip value={number(hraExemption)} label="HRA Exemption" />) = 
 				<b>{numFormatterWithDec.format(grossTotalIncomeUnderOldRegime >= 0 ? grossTotalIncomeUnderOldRegime : 0)}</b>
 		</p>
 										
 		<p>
 			<b>Gross total income in New Regime</b>
-			({number(grossSalary)} + {number(incomeFromSavingsAccount)} + {number(incomeFromOtherSources)} - {number(standardDeductionInNewRegime)} + {number(incomeFromHouseProperty)}) = 
+			(<ToolTip value={number(grossSalary)} label="Gross salary" /> + <ToolTip value={number(incomeFromSavingsAccount)} label="Income from Savings account" /> + <ToolTip value={number(incomeFromOtherSources)} label="Income from Other sources" /> - <ToolTip value={number(standardDeductionInNewRegime)} label="Standard deduction" /> + <ToolTip value={number(incomeFromHouseProperty)} label="Income from House Property" />) = 
 			<b>{numFormatterWithDec.format(grossTotalIncomeUnderNewRegime >= 0 ? grossTotalIncomeUnderNewRegime : 0)}</b>
 		</p>
 
@@ -54,13 +54,13 @@
 		<br/>
 		<p>
 			<b>Net taxable income in Old Regime</b>
-			({grossTotalIncomeUnderOldRegime >= 0 ? grossTotalIncomeUnderOldRegime : 0} - {Math.min(150000, number(deduction80C))} - 
-			 {Math.min(100000, number(deduction80D))} - {deduction80TTA} - {Math.min(50000, number(deduction80CCD1B))} - {number(deduction80CCD2)} - {number(otherDeductions)}) = 
+			(<ToolTip value={grossTotalIncomeUnderOldRegime >= 0 ? grossTotalIncomeUnderOldRegime : 0} label="Gross total income in Old Regime" /> - <ToolTip value={Math.min(150000, number(deduction80C))} label="Deductions under 80C" /> - 
+			 <ToolTip value={Math.min(100000, number(deduction80D))} label="Deductions under 80D" /> - <ToolTip value={deduction80TTA} label="Deductions under 80TTA" /> - <ToolTip value={Math.min(50000, number(deduction80CCD1B))} label="Deductions under 80CCD(1B)" /> - <ToolTip value={number(deduction80CCD2)} label="Deductions under 80CCD(2)" /> - <ToolTip value={number(otherDeductions)} label="Other deductions" />) = 
 			<b>{numFormatterWithDec.format(netTaxableIncomeUnderOldRegime >= 0 ? netTaxableIncomeUnderOldRegime : 0)}</b>
 		</p>
 
 		<p>
-			<b>Net taxable income in New Regime</b> ({grossTotalIncomeUnderNewRegime >= 0 ? grossTotalIncomeUnderNewRegime : 0} - {number(deduction80CCD2)}) = 
+			<b>Net taxable income in New Regime</b> (<ToolTip value={grossTotalIncomeUnderNewRegime >= 0 ? grossTotalIncomeUnderNewRegime : 0} label="Gross total income in New Regime" /> - <ToolTip value={number(deduction80CCD2)} label="Deductions under 80CCD(2)" />) = 
 			<b>
 				{numFormatterWithDec.format(netTaxableIncomeUnderNewRegime >= 0 ? netTaxableIncomeUnderNewRegime : 0)}
 			</b>
@@ -194,6 +194,7 @@
 	import Dialog, {Title, Content, Actions} from '@smui/dialog';
 	import getTaxPayable from './taxCalculator.js'
 	import NumInput from './NumInput.svelte';
+	import ToolTip from './ToolTip.svelte';
 
 	const NEW_TAX_REGIME = 0;
 	const OLD_TAX_REGIME = 1;
