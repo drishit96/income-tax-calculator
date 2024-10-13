@@ -1,10 +1,11 @@
-<span class="tooltip">{value}
+<span data-id={dataId} class="tooltip">{value}
   <span class="tooltiptext" aria-hidden="true">{label}</span>
 </span>
 
 <script>
   export let value = 0;
   export let label = "";
+  export let dataId = "";
 </script>
 
 <style>
