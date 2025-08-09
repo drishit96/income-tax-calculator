@@ -1,4 +1,4 @@
-const newRegimeTaxAmts = [0, 0, 0, 5000, 5000, 5000, 5000, 10000, 10000, 10000, 15000, 15000, 20000, 20000, 20000];
+const newRegimeTaxAmts = [0, 20000, 40000, 60000, 80000, 100000];
 const oldRegimeTaxAmts = [0, 12500, 50000, 50000, 75000, 75000];
 
 function getTaxPayable(netTaxableIncome, taxRegime) {
@@ -36,13 +36,13 @@ function getTaxPayableForOldRegime(netTaxableIncome) {
 function getTaxPayableForNewRegime(netTaxableIncome) {
   const taxAmts = newRegimeTaxAmts;
   let taxPayable = 0;
-  if (netTaxableIncome <= 700000) { return 0; }
+  if (netTaxableIncome <= 1200000) { return 0; }
   else {
-    let d = netTaxableIncome / 100000;
+    let d = netTaxableIncome / 400000;
     let excessAmt = 0;
-    if (d > 15) {
-      excessAmt = netTaxableIncome - 1500000;
-      d = 15;
+    if (d > 6) {
+      excessAmt = netTaxableIncome - 2400000;
+      d = 6;
     }
 
     const dfloor = Math.floor(d);
@@ -50,7 +50,7 @@ function getTaxPayableForNewRegime(netTaxableIncome) {
       taxPayable += taxAmts[i];
     }
 
-    if (d < 15 && dfloor > 0) {
+    if (d < 6 && dfloor > 0) {
       taxPayable += (d - dfloor) * taxAmts[dfloor];
     }
 

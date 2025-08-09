@@ -15,7 +15,7 @@ describe('Income tax calculator tests', () => {
   it('should show correct tax for given input', () => {
     cy.visit('http://localhost:5000/');
 
-    cy.get("[data-id='grossSalary']").type('750000');
+    cy.get("[data-id='grossSalary']").type('1250000');
     cy.get("[data-id='incomeFromSavingsAccount']").type('15000');
     cy.get("[data-id='incomeFromOtherSources']").type('50000');
     cy.get("[data-id='incomeFromHouseProperty']").type('10000');
@@ -32,10 +32,10 @@ describe('Income tax calculator tests', () => {
     cy.get("[data-id='deduction80TTA']").should('be.disabled').and('have.value', "10000");
     cy.get("[data-id='otherDeductions']").type('50000');
 
-    cy.get("[data-id='taxSavingsHeader']").should('have.text', 'Savings in Old regime')
-    cy.get("[data-id='taxPayableUnderOldRegime']").should('have.text', '₹19,552')
-    cy.get("[data-id='taxPayableUnderNewRegime']").should('have.text', '₹24,960')
-    cy.get("[data-id='taxSavingsValue']").should('have.text', '₹5,408')
+    cy.get("[data-id='taxSavingsHeader']").should('have.text', 'Savings in New regime')
+    cy.get("[data-id='taxPayableUnderOldRegime']").should('have.text', '₹1,26,828')
+    cy.get("[data-id='taxPayableUnderNewRegime']").should('have.text', '₹68,640')
+    cy.get("[data-id='taxSavingsValue']").should('have.text', '₹58,188')
   })
 
   it('should not allow negative value for any input except "Income from House Property"', () => {
