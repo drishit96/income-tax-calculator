@@ -88,37 +88,47 @@
 					<td>0%</td>
 				</tr>
 				<tr>
-					<td>₹ 2.5 Lakhs - ₹ 3 Lakhs</td>
+					<td>₹ 2.5 Lakhs - ₹ 4 Lakhs</td>
 					<td>5%</td>
 					<td>0%</td>
 				</tr>
 				<tr>
-					<td>₹ 3 Lakhs - ₹ 5 Lakhs</td>
+					<td>₹ 4 Lakhs - ₹ 5 Lakhs</td>
 					<td>5%</td>
 					<td>5%</td>
 				</tr>
 				<tr>
-					<td>₹ 5 Lakhs - ₹ 7 Lakhs</td>
+					<td>₹ 5 Lakhs - ₹ 8 Lakhs</td>
 					<td>20%</td>
 					<td>5%</td>
 				</tr>
 				<tr>
-					<td>₹ 7 Lakhs - ₹ 10 Lakhs</td>
+					<td>₹ 8 Lakhs - ₹ 10 Lakhs</td>
 					<td>20%</td>
 					<td>10%</td>
 				</tr>
 				<tr>
 					<td>₹ 10 Lakhs - ₹ 12 Lakhs</td>
 					<td>30%</td>
+					<td>10%</td>
+				</tr>
+				<tr>
+					<td>₹ 12 Lakhs - ₹ 16 Lakhs</td>
+					<td>30%</td>
 					<td>15%</td>
 				</tr>
 				<tr>
-					<td>₹ 12 Lakhs - ₹ 15 Lakhs</td>
+					<td>₹ 16 Lakhs - ₹ 20 Lakhs</td>
 					<td>30%</td>
 					<td>20%</td>
 				</tr>
 				<tr>
-					<td>&gt; ₹ 15 Lakhs</td>
+					<td>₹ 20 Lakhs - ₹ 24 Lakhs</td>
+					<td>30%</td>
+					<td>25%</td>
+				</tr>
+				<tr>
+					<td>&gt; ₹ 24 Lakhs</td>
 					<td>30%</td>
 					<td>30%</td>
 				</tr>
