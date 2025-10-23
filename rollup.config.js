@@ -4,7 +4,7 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import terser from "@rollup/plugin-terser";
 import postcss from "rollup-plugin-postcss";
-import { generateSW } from "rollup-plugin-workbox";
+// import { generateSW } from "rollup-plugin-workbox";
 import { spawn } from "child_process";
 
 const production = !process.env.ROLLUP_WATCH;
@@ -83,12 +83,7 @@ export default {
     // instead of npm run dev), minify
     production && terser(),
 
-    production &&
-      generateSW({
-        swDest: "public/sw.js",
-        globDirectory: "public/",
-        globPatterns: ["**/*.{html,json,js,css,png,svg}"],
-      }),
+    // Service worker generation moved to npm script using workbox-cli
   ],
   watch: {
     clearScreen: false,
