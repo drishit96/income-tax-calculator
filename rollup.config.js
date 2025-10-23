@@ -4,7 +4,6 @@ import commonjs from "@rollup/plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import terser from "@rollup/plugin-terser";
 import postcss from "rollup-plugin-postcss";
-// import { generateSW } from "rollup-plugin-workbox";
 import { spawn } from "child_process";
 
 const production = !process.env.ROLLUP_WATCH;
